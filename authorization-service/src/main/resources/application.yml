@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: authorization-service
+  cloud:
+    config:
+      enabled: true
+    discovery:
+      enabled: true
+    gateway:
+      enabled: true
+  config:
+    import: optional:configserver:http://localhost:9999
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:authorization-db
+    username: authorization-service
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:9090/realms/buyme-realm
+#          jwk-set-uri: http://localhost:9090/realms/buyme-realm/protocol/openid-connect/certs
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 8084
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

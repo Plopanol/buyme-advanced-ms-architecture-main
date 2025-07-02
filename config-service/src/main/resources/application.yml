@@ -1,0 +1,14 @@
+spring:
+  config:
+    name: configserver
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/ImproveMySkills/config-repo
+          #uri: file:///C:\Users\ahabouba\IdeaProjects\config-repo
+
+server:
+  port: 9999
