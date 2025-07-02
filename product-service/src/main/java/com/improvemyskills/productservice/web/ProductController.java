@@ -2,6 +2,7 @@ package com.improvemyskills.productservice.web;
 
 import com.improvemyskills.productservice.entity.Product;
 import com.improvemyskills.productservice.service.ProductService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,11 +11,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@Log4j2
 public class ProductController {
 
     ProductService productService;
-    public ProductController(ProductService productService) {
+    ProductConfig productConfig;
+
+    public ProductController(ProductService productService, ProductConfig productConfig) {
         this.productService = productService;
+        this.productConfig = productConfig;
     }
 
     @PostMapping("/products")
@@ -43,8 +48,16 @@ public class ProductController {
 
     @PostMapping("/products/bind/{orderId}")
     ResponseEntity<List<Product>> bindToAnOrder(@PathVariable String orderId, @RequestBody HashSet<Long> productIdList){
+
         return ResponseEntity.ok(
                 productService.bindToAnOrder(orderId, productIdList)
         );
     }
+
+    @GetMapping("/configs")
+    ResponseEntity<String> getProductConfig(){
+        log.info("alertThreshold {}", productConfig.getAlertThreshold());
+        log.info("discountRate {}", productConfig.getDiscountRate());
+		return ResponseEntity.ok(productConfig.getAlertThreshold() + " " + productConfig.getDiscountRate());
+	}
 }

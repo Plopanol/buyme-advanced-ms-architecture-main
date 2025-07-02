@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: native
   config:
     name: configserver
   application:
@@ -6,9 +8,7 @@ spring:
   cloud:
     config:
       server:
-        git:
-          uri: https://github.com/ImproveMySkills/config-repo
-          #uri: file:///C:\Users\ahabouba\IdeaProjects\config-repo
-
+        native:
+          search-locations: file:///D:\Dev\Ici\buyme-advanced-ms-architecture-main\config-repo-main
 server:
   port: 9999
