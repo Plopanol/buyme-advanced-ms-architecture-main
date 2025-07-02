@@ -4,6 +4,7 @@ import com.improvemyskills.productservice.entity.Product;
 import com.improvemyskills.productservice.service.ProductService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
@@ -23,7 +24,7 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-        //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     ResponseEntity<Product> postProduct(@RequestBody Product product){
         return ResponseEntity.ok(
                 productService.save(product)
@@ -31,7 +32,7 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-        //@PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     ResponseEntity<List<Product>> getAll(){
         return ResponseEntity.ok(
                 productService.getAllProducts()
@@ -39,7 +40,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/{productId}")
-        //@PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('USER')")
     ResponseEntity<Product> getProduct(@PathVariable Long productId){
         return ResponseEntity.ok(
                 productService.getProduct(productId).orElse(null)
