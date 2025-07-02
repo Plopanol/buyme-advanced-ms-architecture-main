@@ -48,6 +48,7 @@ public class ProductController {
     }
 
     @PostMapping("/products/bind/{orderId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     ResponseEntity<List<Product>> bindToAnOrder(@PathVariable String orderId, @RequestBody HashSet<Long> productIdList){
 
         return ResponseEntity.ok(
@@ -56,6 +57,7 @@ public class ProductController {
     }
 
     @GetMapping("/configs")
+    @PreAuthorize("hasAuthority('ADMIN')")
     ResponseEntity<String> getProductConfig(){
         log.info("alertThreshold {}", productConfig.getAlertThreshold());
         log.info("discountRate {}", productConfig.getDiscountRate());
