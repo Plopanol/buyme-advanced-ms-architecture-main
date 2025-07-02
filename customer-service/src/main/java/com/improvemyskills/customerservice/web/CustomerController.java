@@ -31,7 +31,7 @@ public class CustomerController {
     }
 
     @GetMapping("/customers/{id}")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     ResponseEntity<Customer> getCustomerById(@PathVariable Long id){
         return ResponseEntity.ok(
                 customerService.getCustomer(id).orElse(null)
