@@ -3,6 +3,7 @@ package com.improvemyskills.customerservice.web;
 import com.improvemyskills.customerservice.entity.Customer;
 import com.improvemyskills.customerservice.service.CustomerService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,11 @@ public class CustomerController {
 
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
+    }
+
+    @GetMapping("/auth")
+    public Authentication authentication(Authentication authentication) {
+        return authentication;
     }
 
     @GetMapping("/customers/{id}")

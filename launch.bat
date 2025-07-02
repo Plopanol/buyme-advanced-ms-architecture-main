@@ -1,0 +1,1 @@
+D:\Dev\Outils\keycloak-26.2.5\bin\kc.bat start-dev --http-port=7080
