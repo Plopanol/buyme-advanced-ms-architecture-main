@@ -29,6 +29,7 @@ public class AuthorizationService {
 		}else{
 			return false;
 		}
+
 		//TODO 2 : Faire un appel vers MS AuthorizationService à L'API http://localhost:8084/api/autorize
 		// en POST en lui passant l'objet {"username": "XXXX", "action": "GET / POST ", "resource" : "NOM D'UN MICROSERVICE"}
 		// preferred_name

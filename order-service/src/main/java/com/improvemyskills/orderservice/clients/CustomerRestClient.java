@@ -1,6 +1,7 @@
 package com.improvemyskills.orderservice.clients;
 
 import com.improvemyskills.orderservice.models.Customer;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,7 @@ import java.util.List;
 public interface CustomerRestClient {
 
     @GetMapping("/api/customers/{id}")
-    //@CircuitBreaker(name = "customerservice", fallbackMethod = "getDefaultCustomer")
+    @CircuitBreaker(name = "CUSTOMER-SERVICE", fallbackMethod = "getDefaultCustomer")
     ResponseEntity<Customer> getCustomerById(@PathVariable Long id);
     @GetMapping(path = "/api/customers")
     ResponseEntity<List<Customer>> getAllCustomers();
@@ -22,11 +23,11 @@ public interface CustomerRestClient {
     @PostMapping("/api/customers")
     ResponseEntity<Customer> postCustomer(@RequestBody Customer customer);
 
-/*    default Customer getDefaultCustomer(Long id, Exception exception){
-        return Customer.builder()
+    default ResponseEntity<Customer> getDefaultCustomer(Long id, Exception exception){
+        return ResponseEntity.ok(Customer.builder()
                 .firstName("UNKNOWN")
                 .lastName("UNKNOWN")
                 .email("UNKNOWN@improvemyskills.com")
-                .build();
-    }*/
+                .build());
+    }
 }
