@@ -11,6 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+// Ajouter pour activer les annotations preAuthorize dans les controllers (Activer par défaut avec Spring)
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
@@ -31,6 +32,7 @@ public class SecurityConfig {
 				//.authorizeHttpRequests(ar -> ar.requestMatchers("/customers").hasAnyAuthority("ADMIN"))
 				.authorizeHttpRequests(ar -> ar.anyRequest().authenticated())
 				//.oauth2ResourceServer(o2 -> o2.jwt(Customizer.withDefaults()))
+				// Ajout du converter jwt token Keycloak pour deplacer les info de Keycloak dans la partie lisible de SpringSecu
 				.oauth2ResourceServer(o2 -> o2.jwt(
 						jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthConverter)
 				))
