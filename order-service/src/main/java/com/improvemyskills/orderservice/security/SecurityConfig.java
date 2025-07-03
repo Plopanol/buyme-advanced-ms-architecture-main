@@ -11,7 +11,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@RefreshScope
 @EnableWebSecurity
 // Ajouter pour activer les annotations preAuthorize dans les controllers (Activer par défaut avec Spring)
 @EnableMethodSecurity(prePostEnabled = true)

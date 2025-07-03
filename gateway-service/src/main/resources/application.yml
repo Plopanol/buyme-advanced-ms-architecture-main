@@ -20,6 +20,12 @@ spring:
 #          predicates:
 #            - Path=/api/products/**
 #            #- Method=GET
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:7080/realms/buyme-realm
+          jwk-set-uri: http://localhost:7080/realms/buyme-realm/protocol/openid-connect/certs
 eureka:
   instance:
     prefer-ip-address: true
