@@ -1,0 +1,1 @@
+D:\Dev\Outils\vault_1.20.0_windows_386\vault.exe server -dev-tls
