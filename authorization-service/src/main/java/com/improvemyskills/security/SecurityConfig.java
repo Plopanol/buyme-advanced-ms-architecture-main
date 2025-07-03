@@ -1,4 +1,4 @@
-package com.improvemyskills.customerservice.security;
+package com.improvemyskills.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
