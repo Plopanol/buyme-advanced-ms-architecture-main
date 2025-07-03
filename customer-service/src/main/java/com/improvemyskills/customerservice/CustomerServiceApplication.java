@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.List;
 
 @SpringBootApplication
-//@EnableFeignClients
+@EnableFeignClients
 public class CustomerServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(CustomerServiceApplication.class);

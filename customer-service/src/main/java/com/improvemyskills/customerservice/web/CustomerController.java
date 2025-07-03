@@ -38,7 +38,7 @@ public class CustomerController {
         );
     }
     @GetMapping(path = "/customers")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("@authorizationService.hasPermission(authentication, 'GET', 'CUSTOMER-SERVICE')")
     ResponseEntity<List<Customer>> getAllCustomers(){
         return ResponseEntity.ok(
                 customerService.getAllCustomers()
