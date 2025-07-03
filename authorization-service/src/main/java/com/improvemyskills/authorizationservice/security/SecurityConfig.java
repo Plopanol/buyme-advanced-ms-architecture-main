@@ -1,4 +1,4 @@
-package com.improvemyskills.security;
+package com.improvemyskills.authorizationservice.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

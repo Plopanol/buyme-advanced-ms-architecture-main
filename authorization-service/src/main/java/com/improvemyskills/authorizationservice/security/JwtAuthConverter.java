@@ -1,4 +1,4 @@
-package com.improvemyskills.security;
+package com.improvemyskills.authorizationservice.security;
 
 import jakarta.persistence.Convert;
 import org.springframework.core.convert.converter.Converter;
