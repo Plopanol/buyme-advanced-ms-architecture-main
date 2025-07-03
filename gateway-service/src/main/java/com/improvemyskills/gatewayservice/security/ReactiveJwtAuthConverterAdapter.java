@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 @Component
-public class ReativeJwtAuthConverter implements Converter<Jwt, Mono<AbstractAuthenticationToken>> {
+public class ReactiveJwtAuthConverterAdapter implements Converter<Jwt, Mono<AbstractAuthenticationToken>> {
 
 	private final JwtAuthConverter jwtAuthConverter;
 
-	public ReativeJwtAuthConverter(JwtAuthConverter jwtAuthConverter) {
+	public ReactiveJwtAuthConverterAdapter(JwtAuthConverter jwtAuthConverter) {
 		this.jwtAuthConverter = jwtAuthConverter;
 	}
 	@Override
