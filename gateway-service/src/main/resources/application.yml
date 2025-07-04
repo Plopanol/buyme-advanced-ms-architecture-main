@@ -24,14 +24,16 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:7080/realms/buyme-realm
-          jwk-set-uri: http://localhost:7080/realms/buyme-realm/protocol/openid-connect/certs
+          #issuer-uri: http://localhost:7080/realms/buyme-realm
+          #jwk-set-uri: http://localhost:7080/realms/buyme-realm/protocol/openid-connect/certs
+          issuer-uri: http://keycloak:7080/realms/buyme-realm
+          jwk-set-uri: http://keycloak:7080/realms/buyme-realm/protocol/openid-connect/certs
 eureka:
   instance:
     prefer-ip-address: true
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://discovery-service:8761/eureka
 
 server:
   port: 8080

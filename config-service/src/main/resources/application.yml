@@ -9,6 +9,7 @@ spring:
     config:
       server:
         native:
-          search-locations: file:///D:\Dev\Ici\buyme-advanced-ms-architecture-main\config-repo-main
+          search-locations: file:///app/config/
+          #search-locations: file:///D:\Dev\Ici\buyme-advanced-ms-architecture-main\config-repo-main
 server:
   port: 9999

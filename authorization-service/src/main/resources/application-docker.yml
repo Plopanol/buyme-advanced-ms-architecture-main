@@ -1,6 +1,6 @@
 spring:
   application:
-    name: product-service
+    name: authorization-service
   cloud:
     config:
       enabled: true
@@ -9,20 +9,17 @@ spring:
     gateway:
       enabled: true
   config:
-        #import: optional:configserver:http://localhost:9999
     import: optional:configserver:http://config-service:9999
   h2:
     console:
       enabled: true
   datasource:
-    url: jdbc:h2:mem:product-db
-    username: product-service
+    url: jdbc:h2:mem:authorization-db
+    username: authorization-service
   security:
     oauth2:
       resourceserver:
         jwt:
-          #issuer-uri: http://localhost:7080/realms/buyme-realm
-          #jwk-set-uri: http://localhost:7080/realms/buyme-realm/protocol/openid-connect/certs
           issuer-uri: http://keycloak:7080/realms/buyme-realm
           jwk-set-uri: http://keycloak:7080/realms/buyme-realm/protocol/openid-connect/certs
 eureka:
@@ -33,7 +30,7 @@ eureka:
       defaultZone: http://discovery-service:8761/eureka
 
 server:
-  port: 8082
+  port: 8084
 
 management:
   endpoints:

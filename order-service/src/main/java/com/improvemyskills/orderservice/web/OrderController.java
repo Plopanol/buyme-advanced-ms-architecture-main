@@ -30,7 +30,6 @@ public class OrderController {
         );
     }
     @GetMapping("/orders")
-    @PreAuthorize("hasAuthority('USER')")
     ResponseEntity<List<Order>> getAllOrders(){
         return ResponseEntity.ok(
                 orderService.getAllOrders()
