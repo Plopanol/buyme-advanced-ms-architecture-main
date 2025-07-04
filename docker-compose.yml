@@ -7,11 +7,11 @@ services:
       - "8761:8761"
     networks:
       - spring-net
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 5
 
   config-service:
     build:
@@ -19,107 +19,104 @@ services:
       dockerfile: config-service/Dockerfile
     ports:
       - "9999:9999"
-    depends_on:
-      discovery-service:
-        condition: service_healthy
+#    depends_on:
+#      discovery-service:
+#        condition: service_healthy
     networks:
       - spring-net
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9999/actuator/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:9999/actuator/health"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 5
 
   gateway-service:
     build: ./gateway-service
     ports:
       - "8080:8080"
-    depends_on:
-      discovery-service:
-        condition: service_healthy
-      config-service:
-        condition: service_healthy
+#    depends_on:
+#      discovery-service:
+#        condition: service_healthy
+#      config-service:
+#        condition: service_healthy
     networks:
       - spring-net
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 5
 
   authorization-service:
     build: ./authorization-service
     ports:
       - "8084:8084"
-    depends_on:
-      discovery-service:
-        condition: service_healthy
-      config-service:
-        condition: service_healthy
+#    depends_on:
+#      discovery-service:
+#        condition: service_healthy
+#      config-service:
+#        condition: service_healthy
     networks:
       - spring-net
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8084/actuator/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:8084/actuator/health"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 5
 
   order-service:
     build: ./order-service
     ports:
       - "8083:8083"
-    depends_on:
-      discovery-service:
-        condition: service_healthy
-      config-service:
-        condition: service_healthy
-      gateway-service:
-        condition: service_healthy
+#      discovery-service:
+#        condition: service_healthy
+#      config-service:
+#        condition: service_healthy
+#      gateway-service:
+#        condition: service_healthy
     networks:
       - spring-net
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8083/actuator/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:8083/actuator/health"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 5
 
   customer-service:
     build: ./customer-service
     ports:
       - "8081:8081"
-    depends_on:
-      discovery-service:
-        condition: service_healthy
-      config-service:
-        condition: service_healthy
-      gateway-service:
-        condition: service_healthy
+#      discovery-service:
+#        condition: service_healthy
+#      config-service:
+#        condition: service_healthy
+#      gateway-service:
+#        condition: service_healthy
     networks:
       - spring-net
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 5
 
   product-service:
     build: ./product-service
     ports:
       - "8082:8082"
-    depends_on:
-      discovery-service:
-        condition: service_healthy
-      config-service:
-        condition: service_healthy
-      gateway-service:
-        condition: service_healthy
+#      discovery-service:
+#        condition: service_healthy
+#      config-service:
+#        condition: service_healthy
+#      gateway-service:
+#        condition: service_healthy
     networks:
       - spring-net
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 5
 
 #  vault-service:
 #    build: ./vault-service
@@ -139,13 +136,15 @@ services:
 #      retries: 5
 
   keycloak:
-    image: quay.io/keycloak/keycloak:24.0.3
-    command: start-dev
+    image: keycloak/keycloak:26.1
+    command: "start-dev"
     environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_BOOTSTRAP_ADMIN_USERNAME: "admin"
+      KC_BOOTSTRAP_ADMIN_PASSWORD: "admin"
+    volumes:
+      - keycloak_data:/opt/keycloak/data
     ports:
-      - "9090:9090"
+      - "7080:8080"
     networks:
       - spring-net
     healthcheck:
@@ -157,3 +156,6 @@ services:
 networks:
   spring-net:
     driver: bridge
+
+volumes:
+  keycloak_data:
