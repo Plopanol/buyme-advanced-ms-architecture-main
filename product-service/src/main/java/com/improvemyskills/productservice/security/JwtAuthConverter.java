@@ -1,5 +1,6 @@
 package com.improvemyskills.productservice.security;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
+@Log4j2
 public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationToken> {
 	private final JwtGrantedAuthoritiesConverter
 			jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
@@ -23,7 +25,7 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
 
 	@Override
 	public AbstractAuthenticationToken convert(Jwt source) {
-
+		log.info("Converting Jwt to Authentication Token : " +  source);
 		// Le jwtGrantedAuthoritiesConverter va lire le scope du token, pour recuperer les infos
 		// Le extractResourceRoles va extraire les infos mis dans realm_access les informations des roles
 		// Puis ca les concatènes
@@ -36,6 +38,7 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
 	}
 
 	private Collection<GrantedAuthority> extractResourceRoles(Jwt jwt) {
+		log.info("Extracting resource roles from jwt : " + jwt);
 		Map<String , Object> realmAccess;
 		Collection<String> roles;
 		if(jwt.getClaim("realm_access")==null){
