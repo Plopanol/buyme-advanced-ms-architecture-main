@@ -29,4 +29,5 @@ public class Order {
     private Customer customer;
     @Transient
     private Collection<Product> products;
+    private boolean archive;
 }
