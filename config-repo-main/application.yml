@@ -1,0 +1,18 @@
+global:
+  params:
+    p1: 10001
+    p2: 20001
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+  endpoint:
+    refresh:
+      enabled: true
+
+logging:
+  level:
+    ROOT: DEBUG

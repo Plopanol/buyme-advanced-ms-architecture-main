@@ -1,0 +1,5 @@
+product:
+  pricing:
+    discount-rate: 5
+  stock:
+    alert-threshold: 5
